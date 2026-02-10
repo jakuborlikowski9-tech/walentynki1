@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Walentynki ❤️</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+    body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        background-color: #ffe6ee;
+        font-family: Arial, sans-serif;
+    }
+	button {
+    padding: 15px 30px;
+    font-size: 18px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    margin: 10px;
+}
+button:first-of-type {
+    background-color: #4CAF50;
+    color: white;
+}
+
+button:last-of-type {
+    background-color: #f44336;
+    color: white;
+}
+#buttons {
+    position: relative;
+}
+
+#noBtn {
+    position: absolute;
+}
+/* delikatne wejście */
+body {
+    animation: fadeIn 1s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* przycisk Yes – pulsuje */
+#yesBtn {
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+/* płynne uciekanie */
+#noBtn {
+    transition: left 0.3s ease, top 0.3s ease;
+}
+@media (max-width: 600px) {
+    h1 {
+        font-size: 24px;
+        text-align: center;
+    }
+
+    button {
+        font-size: 16px;
+        padding: 12px 20px;
+    }
+
+    img {
+        width: 150px;
+    }
+}
+#counter {
+    display: none;
+}
+</style>
+</head>
+<body>
+
+    <h1 id="question">Zostaniesz moją walentynką misiaczku?</h1>
+<img id="image" src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExMjdhcjBtOWppdGZpMTkyNmJmamZ5OGVvaTZoMmY3aDVlbXQ3MGs1aiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/9zzUYFVSrpKRaZuW5A/giphy.gif" width="200"
+
+   <br><br>
+   
+   <p id="counter">Uciekł już: 0 razy</p>
+   
+    <div id="buttons">
+    <button id="yesBtn">Tak</button>
+    <button id="noBtn">Nie</button>
+</div>
+	
+	<p> 67 stołów warsztatowych </p>
+	
+	<script>
+    const yesButton = document.getElementById("yesBtn");
+    const noButton = document.getElementById("noBtn");
+    const question = document.getElementById("question");
+    const image = document.getElementById("image");
+    const counterText = document.getElementById("counter");
+    const container = document.getElementById("buttons");
+
+    let escapeCount = 0;
+
+    yesButton.addEventListener("click", function () {
+        question.textContent = "Yay! Kocham Cię ❤️";
+        image.src = "https://media.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif";
+        noButton.style.display = "none";
+        counterText.textContent = "Powiedziałaś TAK 🥰";
+    });
+
+    function moveNoButton() {
+        escapeCount++;
+        counterText.textContent = "Uciekł już: " + escapeCount + " razy";
+
+        const maxX = container.offsetWidth - noButton.offsetWidth;
+        const maxY = container.offsetHeight - noButton.offsetHeight;
+
+        const randomX = Math.random() * maxX;
+        const randomY = Math.random() * maxY;
+
+        noButton.style.left = randomX + "px";
+        noButton.style.top = randomY + "px";
+
+        if (escapeCount >= 7) {
+            noButton.style.display = "none";
+            counterText.textContent = "No dobra… gg 😏";
+        }
+    }
+
+    /* komputer */
+    noButton.addEventListener("mouseenter", moveNoButton);
+
+    /* telefon */
+    noButton.addEventListener("touchstart", function (e) {
+        e.preventDefault();
+        moveNoButton();
+    });
+</script>
+
+
+</body>
+</html>
