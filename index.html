@@ -33,13 +33,14 @@ button:last-of-type {
     background-color: #f44336;
     color: white;
 }
-#buttons {
-    position: relative;
-}
 
 #noBtn {
     position: absolute;
+	left: 55%;
+    top: 65%;
+    transition: left 0.3s ease, top 0.3s ease;
 }
+
 /* delikatne wejście */
 body {
     animation: fadeIn 1s ease;
@@ -94,10 +95,8 @@ body {
    
    <p id="counter">Uciekł już: 0 razy</p>
    
-    <div id="buttons">
-    <button id="yesBtn">Tak</button>
-    <button id="noBtn">Nie</button>
-</div>
+   <button id="yesBtn">Yes</button>
+<button id="noBtn">No</button>
 	
 	<p> 67 stołów warsztatowych </p>
 	
@@ -122,8 +121,8 @@ body {
         escapeCount++;
         counterText.textContent = "Uciekł już: " + escapeCount + " razy";
 
-        const maxX = container.offsetWidth - noButton.offsetWidth;
-        const maxY = container.offsetHeight - noButton.offsetHeight;
+        const maxX = window.innerWidth - noButton.offsetWidth - 20;
+        const maxY = window.innerHeight - noButton.offsetHeight - 20;
 
         const randomX = Math.random() * maxX;
         const randomY = Math.random() * maxY;
